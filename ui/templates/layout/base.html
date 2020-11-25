@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Horse Pedigree Database</title>
+    
+    {% load static %}
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/bootstrap-grid.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/bootstrap-reboot.css' %}" />
+
+    <script src="https://kit.fontawesome.com/8c41a14d8c.js" crossorigin="anonymous"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">
+          <i class="fas fa-horse-head"></i>
+          Pedigree Database
+        </a>
+      </nav>
+
+      {% block content %}
+      {% endblock %}
+    </div>
+  </body>
+</html>
