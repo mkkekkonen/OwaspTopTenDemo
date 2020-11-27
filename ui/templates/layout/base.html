@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" />
     <link rel="stylesheet" href="{% static 'css/bootstrap-grid.css' %}" />
     <link rel="stylesheet" href="{% static 'css/bootstrap-reboot.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
 
     <script src="https://kit.fontawesome.com/8c41a14d8c.js" crossorigin="anonymous"></script>
     <script src="{% static 'js/bootstrap.js' %}"></script>
@@ -15,11 +16,27 @@
 
   <body>
     <div class="container">
-      <nav class="navbar navbar-dark bg-dark">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="/">
           <i class="fas fa-horse-head"></i>
           Pedigree Database
         </a>
+
+        <ul class="navbar-nav mr-auto">
+          {% if not logged_in %}
+            <li class="nav-item">
+              <a class="nav-link" href="/login">Login</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/register">Register</a>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="/logout">Logout</a>
+            </li>
+          {% endif %}
+        </ul>
       </nav>
 
       {% block content %}
