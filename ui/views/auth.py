@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 
-from .forms import LoginForm, RegisterForm
+from ui.forms import LoginForm, RegisterForm
 
 def loginView(request):
   if request.method == 'GET':
