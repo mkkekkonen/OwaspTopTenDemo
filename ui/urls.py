@@ -9,4 +9,5 @@ urlpatterns = [
   path('register/', views.registerView, name='register'),
   path('horses/', views.horsesListView, name='horses_list'),
   path('horse/', views.addHorseView, name='add_horse'),
+  path('horse/<int:horse_id>/', views.editHorseView, name='edit_horse')
 ]
