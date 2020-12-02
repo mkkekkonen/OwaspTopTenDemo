@@ -1,3 +1,11 @@
+h1, h2 {
+  padding: 2rem 0;
+}
+
+.alert {
+  margin: 1rem 0;
+}
+
 .errorlist {
   color: #A00;
   list-style: none;

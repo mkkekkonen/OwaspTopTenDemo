@@ -1,0 +1,97 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-lg">
+      {% if flash_error %}
+        <div class="alert alert-danger">{{ flash_error }}</div>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg">
+      <h2>Add a Horse to the Database</h2>
+
+      {{ form.non_field_errors }}
+
+      <form method="POST">
+        {% csrf_token %}
+
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" name="name" id="name" class="form-control" value="{{ form.name.value }}" />
+          {{ form.name.errors }}
+        </div>
+
+        <div class="form-group">
+          <label for="dateOfBirth">Date of birth:</label>
+          <input type="date" name="date_of_birth" id="dateOfBirth" class="form-control" value="{{ form.date_of_birth.value }}" />
+          {{ form.date_of_birth.errors }}
+        </div>
+
+        <div class="form-group">
+          <label for="gender">Gender:</label>
+          <select name="gender" id="gender" class="form-control">
+            {% for opt in gender_options %}
+              <option
+                value="{{ opt.0 }}"
+                {% if opt.0 == form.gender.value %}
+                  selected
+                {% endif %}
+              >
+                {{ opt.1 }}
+              </option>
+            {% endfor %}
+          </select>
+          {{ form.gender.errors }}
+        </div>
+
+        <div class="form-group">
+          <label for="breed">Breed:</label>
+          <select name="breed" id="breed" class="form-control">
+            {% for opt in breed_options %}
+              <option
+                value="{{ opt.0 }}"
+                {% if opt.0 == form.breed.value %}
+                  selected
+                {% endif %}
+              >
+                {{ opt.1 }}
+              </option>
+            {% endfor %}
+          </select>
+          {{ form.breed.errors }}
+        </div>
+
+        <div class="form-group">
+          <label for="color">Color:</label>
+          <select name="color" id="color" class="form-control">
+            {% for opt in color_options %}
+              <option
+                value="{{ opt.0 }}"
+                {% if opt.0 == form.color.value %}
+                  selected
+                {% endif %}
+              >
+                {{ opt.1 }}
+              </option>
+            {% endfor %}
+          </select>
+          {{ form.color.errors }}
+        </div>
+
+        <div class="form-group">
+          <label for="extraInfo">Extra info (optional):</label>
+          <textarea name="extra_info" id="extraInfo" class="form-control" rows="3"></textarea>
+          {{ form.extra_info.errors }}
+        </div>
+
+        <div>
+          <button type="submit" class="btn btn-dark">Add horse</button>
+        </div>
+      </form>
+    </div>
+    <div class="col-lg"></div>
+  </div>
+{% endblock %}

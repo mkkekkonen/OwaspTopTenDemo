@@ -1,9 +1,11 @@
 {% extends 'layout/base.html' %}
 
+{% load horses %}
+
 {% block content %}
   <div class="row">
     <div class="col-lg">
-      <h1>All Horses</h1>
+      <h2>All Horses</h2>
 
       <table class="table table-striped">
         <thead>
@@ -23,9 +25,9 @@
               <th scope="row">{{ horse.id }}</td>
               <td>{{ horse.name }}</td>
               <td>{{ horse.date_of_birth }}</td>
-              <td>{{ horse.gender }}</td>
-              <td>{{ horse.breed }}</td>
-              <td>{{ horse.color }}</td>
+              <td>{% gender horse.gender %}</td>
+              <td>{% breed horse.breed %}</td>
+              <td>{% color horse.color %}</td>
             </tr>
           {% empty %}
             <tr>
