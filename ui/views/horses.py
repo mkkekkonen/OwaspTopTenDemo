@@ -79,6 +79,49 @@ def editHorseView(request, horse_id):
 
     return render(request, 'data/addEdit.html', {
       'logged_in': True,
+      'editing': True,
+      'form': form,
+      **OPTIONS,
+    })
+  
+  elif request.method == 'POST':
+    form = AddEditHorseForm(request.POST)
+
+    horse = None
+    try:
+      horse = Horse.objects.get(pk=horse_id)
+    except ObjectDoesNotExist:
+      return render(request, 'data/addEdit.html', {
+        'flash_error': 'Horse with the ID {} does not exist.'.format(horse_id),
+        'logged_in': True,
+        'editing': True,
+        'form': form,
+        **OPTIONS,
+      })
+
+    if form.is_valid():
+      try:
+        horse.name = form.cleaned_data['name']
+        horse.date_of_birth = form.cleaned_data['date_of_birth']
+        horse.gender = form.cleaned_data['gender']
+        horse.breed = form.cleaned_data['breed']
+        horse.color = form.cleaned_data['color']
+        horse.extra_info = form.cleaned_data.get('extra_info')
+        horse.save()
+      except Exception as e:
+        return render(request, 'data/addEdit.html', {
+          'flash_error': e,
+          'logged_in': True,
+          'editing': True,
+          'form': form,
+          **OPTIONS,
+        })
+
+      return redirect('/horses')
+
+    return render(request, 'data/addEdit.html', {
+      'logged_in': True,
+      'editing': True,
       'form': form,
       **OPTIONS,
     })

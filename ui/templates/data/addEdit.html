@@ -1,5 +1,7 @@
 {% extends 'layout/base.html' %}
 
+{% load horses %}
+
 {% block content %}
   <div class="row">
     <div class="col-lg">
@@ -11,7 +13,11 @@
 
   <div class="row">
     <div class="col-lg">
-      <h2>Add a Horse to the Database</h2>
+      {% if editing %}
+        <h2>Edit Horse Details</h2>
+      {% else %}
+        <h2>Add a Horse to the Database</h2>
+      {% endif %}
 
       {{ form.non_field_errors }}
 
@@ -26,7 +32,7 @@
 
         <div class="form-group">
           <label for="dateOfBirth">Date of birth:</label>
-          <input type="date" name="date_of_birth" id="dateOfBirth" class="form-control" value="{{ form.date_of_birth.value }}" />
+          <input type="date" name="date_of_birth" id="dateOfBirth" class="form-control" value="{% form_date form.date_of_birth.value %}" />
           {{ form.date_of_birth.errors }}
         </div>
 
@@ -83,12 +89,16 @@
 
         <div class="form-group">
           <label for="extraInfo">Extra info (optional):</label>
-          <textarea name="extra_info" id="extraInfo" class="form-control" rows="3"></textarea>
+          <textarea name="extra_info" id="extraInfo" class="form-control" rows="3">{{ form.extra_info.value }}</textarea>
           {{ form.extra_info.errors }}
         </div>
 
         <div>
-          <button type="submit" class="btn btn-dark">Add horse</button>
+          {% if editing %}
+          <button type="submit" class="btn btn-dark">Save</button>
+          {% else %}
+            <button type="submit" class="btn btn-dark">Add horse</button>
+          {% endif %}
         </div>
       </form>
     </div>

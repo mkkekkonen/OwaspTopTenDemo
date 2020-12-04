@@ -17,3 +17,8 @@ def breed(breed_key):
 @register.simple_tag
 def color(color_key):
   return [choice for choice in Horse.COLOR_CHOICES if choice[0] == color_key][0][1]
+
+
+@register.simple_tag
+def form_date(date):
+  return date and date.strftime('%Y-%m-%d')
