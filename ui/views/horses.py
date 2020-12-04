@@ -68,21 +68,27 @@ def editHorseView(request, horse_id):
       request.session['flash_error'] = 'Horse with the ID {} does not exist.'.format(horse_id)
       return redirect('/horses')
 
-    form = AddEditHorseForm(initial={
-      'name': horse.name,
-      'date_of_birth': horse.date_of_birth,
-      'gender': horse.gender,
-      'breed': horse.breed,
-      'color': horse.color,
-      'extra_info': horse.extra_info,
-    })
+    if request.GET.get('edit'):
+      form = AddEditHorseForm(initial={
+        'name': horse.name,
+        'date_of_birth': horse.date_of_birth,
+        'gender': horse.gender,
+        'breed': horse.breed,
+        'color': horse.color,
+        'extra_info': horse.extra_info,
+      })
 
-    return render(request, 'data/addEdit.html', {
-      'logged_in': True,
-      'editing': True,
-      'form': form,
-      **OPTIONS,
-    })
+      return render(request, 'data/addEdit.html', {
+        'logged_in': True,
+        'editing': True,
+        'form': form,
+        **OPTIONS,
+      })
+    else:
+      return render(request, 'data/view.html', {
+        'logged_in': True,
+        'horse': horse,
+      })
   
   elif request.method == 'POST':
     form = AddEditHorseForm(request.POST)

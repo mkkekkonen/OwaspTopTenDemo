@@ -1,0 +1,36 @@
+{% extends 'layout/base.html' %}
+
+{% load horses %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-lg">
+      <h2>{{ horse.name }}</h2>
+
+      <div class="view-item">
+        <span class="view-label">Date of birth:</span>
+        <span>{{ horse.date_of_birth }}</span>
+      </div>
+
+      <div class="view-item">
+        <span class="view-label">Gender:</span>
+        <span>{% gender horse.gender %}</span>
+      </div>
+
+      <div class="view-item">
+        <span class="view-label">Breed:</span>
+        <span>{% breed horse.breed %}</span>
+      </div>
+
+      <div class="view-item">
+        <span class="view-label">Color:</span>
+        <span>{% color horse.color %}</span>
+      </div>
+
+      <div class="view-item">
+        <div class="view-label">Extra info:</div>
+        <div>{{ horse.extra_info|safe }}</div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
